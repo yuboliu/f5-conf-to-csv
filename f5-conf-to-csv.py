@@ -424,7 +424,7 @@ for conf_file, file_name in zip(conf_files, file_names_without_extension):
     write_csv(conn, "SELECT * FROM Persistence", "Output/{}/f5-persistence.csv".format(file_name))
     write_csv(conn, "SELECT * FROM Rules", "Output/{}/f5-rules.csv".format(file_name))
     write_csv(conn,
-              "SELECT VirtualServers.Name as 'VirtualServer', Pools.Name as 'Pool', Pools.Member_Name as 'Pool Member', Pools.Member_Address, VirtualServers.IP_Protocol as 'Protocol', VirtualServers.Profiles, VirtualServers.Rules, Pools.Monitor FROM Pools LEFT JOIN VirtualServers ON Pools.Name = VirtualServers.Pool",
+              "SELECT VirtualServers.Name as 'VirtualServer', VirtualServers.Destination, Pools.Name as 'Pool', Pools.Member_Name as 'Pool Member', Pools.Member_Address, Pools.LB_Mode, VirtualServers.IP_Protocol as 'Protocol', VirtualServers.Profiles, VirtualServers.Rules, VirtualServers.Persist, Pools.Monitor FROM Pools LEFT JOIN VirtualServers ON Pools.Name = VirtualServers.Pool",
               "Output/{}/f5-overview.csv".format(file_name))
 
     conn.close()
